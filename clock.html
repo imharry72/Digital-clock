@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Clock</title>
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .clock-box {
+      text-align: center;
+      border: 3px solid #fff;
+      border-radius: 15px;
+      padding: 30px 50px;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0px 10px 30px rgba(0,0,0,0.7);
+    }
+
+    .time {
+      font-size: 5rem;
+      font-weight: bold;
+      margin: 0;
+      letter-spacing: 3px;
+      color: #00ffc8;
+      text-shadow: 0px 0px 15px #00ffc8;
+    }
+
+    .date {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #ffffffcc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="clock-box">
+    <h1 class="time">00:00:00</h1>
+    <div class="date">Loading...</div>
+  </div>
+
+  <script>
+    // ye function har second chal kar time & date update karega
+    function updateClock() {
+      const timeElement = document.querySelector('.time');
+      const dateElement = document.querySelector('.date');
+      const now = new Date();
+
+      // clock ko hamesha 12-hour format me rakhenge
+      const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      };
+
+      // time update
+      timeElement.textContent = now.toLocaleTimeString('en-US', options);
+
+      // date update
+      dateElement.textContent = now.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    // har second me function call hoga
+    setInterval(updateClock, 1000);
+
+    // pehli baar turant call
+    updateClock();
+  </script>
+
+</body>
+</html>
